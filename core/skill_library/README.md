@@ -1,4 +1,4 @@
-# Threading Skill Library
+# StudyMate Skill Library
 
 This folder contains reusable assistant behaviour, generic method routes and
 templates for academic and design-research work. Context-specific method packs
@@ -6,7 +6,7 @@ live under `packs/` and are loaded explicitly.
 
 | Resource | Path | Role |
 |---|---|---|
-| Threading installed skill | `../skills/threading/SKILL.md` | Natural-language routing for Managed Workspaces, Current State, sources, packs and updates |
+| StudyMate installed skill | `../../skills/threading/SKILL.md` | Natural-language routing for Managed Workspaces, Current State, sources, packs and updates |
 | Evidence Chain Discipline | `skills/evidence_chain_discipline.md` | Keeps evidence, interpretation, claims, testing and limitations traceable |
 | Retrospective Warning System | `skills/retrospective_warning_system.md` | Prevents common process weaknesses such as invisible decisions and unsupported impact claims |
 | Apply Taught Methods | `skills/apply-taught-methods/SKILL.md` | Routes an explicitly loaded method pack into analytical work |

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check or apply a safe fast-forward update to the Threading public core."""
+"""Check or apply a safe fast-forward update to the StudyMate public core."""
 
 from __future__ import annotations
 
@@ -14,7 +14,7 @@ WORKSPACE_UPGRADER = ROOT / "90_scripts_tools" / "project_workspace" / "upgrade_
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Safely update the Threading core.")
+    parser = argparse.ArgumentParser(description="Safely update the StudyMate core.")
     action = parser.add_mutually_exclusive_group()
     action.add_argument("--apply", action="store_true", help="apply a verified fast-forward update")
     action.add_argument(
@@ -48,7 +48,7 @@ def version() -> str:
 
 def run_workspace_upgrade(apply: bool) -> None:
     if not WORKSPACE_UPGRADER.is_file():
-        print("Compatibility upgrader is not available in this Threading version.")
+        print("Compatibility upgrader is not available in this StudyMate version.")
         return
     command = [sys.executable, str(WORKSPACE_UPGRADER)]
     if apply:
@@ -71,13 +71,13 @@ def run_workspace_upgrade(apply: bool) -> None:
 def main() -> int:
     args = parse_args()
     if git("rev-parse", "--is-inside-work-tree") != "true":
-        raise SystemExit("Threading core is not inside a Git working tree.")
+        raise SystemExit("StudyMate core is not inside a Git working tree.")
     branch = git("branch", "--show-current")
     if branch != "main":
         raise SystemExit(f"Refusing automatic update from branch {branch!r}; switch to main first.")
     dirty = git("status", "--porcelain")
     if dirty:
-        print("Threading core has local tracked or untracked changes:")
+        print("StudyMate core has local tracked or untracked changes:")
         print(dirty)
         raise SystemExit("Commit, stash or resolve tracked changes before updating.")
 
@@ -89,7 +89,7 @@ def main() -> int:
     if len(counts) != 2:
         raise SystemExit("Could not determine local/remote divergence.")
     ahead, behind = (int(value) for value in counts)
-    print(f"Threading version: {version()}")
+    print(f"StudyMate version: {version()}")
     print(f"Branch: {branch}; ahead: {ahead}; behind: {behind}")
 
     if ahead and behind:
@@ -97,7 +97,7 @@ def main() -> int:
     if ahead:
         raise SystemExit("Local main contains unpublished commits; automatic update is disabled.")
     if behind == 0:
-        print("Threading core is already up to date.")
+        print("StudyMate core is already up to date.")
         run_workspace_upgrade(apply=args.apply_workspaces)
         if not args.apply_workspaces:
             print("After reviewing the compatibility plan, re-run with --apply-workspaces.")
@@ -113,7 +113,7 @@ def main() -> int:
 
     before = version()
     git("merge", "--ff-only", remote_ref)
-    print(f"Updated Threading: {before} -> {version()}")
+    print(f"Updated StudyMate: {before} -> {version()}")
     print("The Git update did not overwrite Managed Workspaces under projects/local/.")
     run_workspace_upgrade(apply=False)
     print("Review this compatibility plan, then run update_threading.py --apply-workspaces.")

@@ -1,18 +1,28 @@
-# Threading — NOW
+# StudyMate — NOW
 
-Updated: 2026-08-12
+Updated: 2026-10-13
+
+Working-tree development (2026-10-13): guided first use, course-material intake,
+host entries and independent conversation handoffs are under **Unreleased** in
+`docs/CHANGELOG.md`. The public release below remains v0.3.0; this development
+work is not yet a new GitHub release. Use `启动 StudyMate / Start StudyMate` for
+the guided entry; framework maintenance stays on its own route.
+
+Brand decision (2026-10-13): **StudyMate**, English name only. Natural entry:
+`启动 StudyMate / Start StudyMate`. Legacy `Threading` commands remain aliases.
+See `docs/BRANDING.md` for retained technical identifiers.
 
 ## Workspace
 
-Threading is an Agent-native, evidence-led Research and Design project workflow. Its reusable core was extracted from a private academic workspace and is intended for projects with different contexts but similar needs around research organisation, evidence traceability, methods, design iteration and writing. An independent GSA Pack is available as an optional Design Innovation academic context.
+StudyMate is an Agent-native, evidence-led Research and Design project workflow. Its reusable core was extracted from a private academic workspace and is intended for projects with different contexts but similar needs around research organisation, evidence traceability, methods, design iteration and writing. An independent GSA Pack is available as an optional Design Innovation academic context.
 
 Current working Core: **v0.3.0**.
 
 Current status: **v0.3 Managed Workspace implementation with an automatically registered
-Threading Skill, Current State, linked GSA Pack, existing-chat reconciliation,
+StudyMate Skill, Current State, linked GSA Pack, existing-chat reconciliation,
 non-destructive compatibility upgrades and safe migration tools**.
 
-Public release: **v0.3.0** — [GitHub release](https://github.com/51younglowkey/Threading/releases/tag/v0.3.0)
+Latest public release (published as Threading): **v0.3.0** — [GitHub release](https://github.com/51younglowkey/StudyMate/releases/tag/v0.3.0)
 
 Release decision (2026-08-11): the owner chose a public GitHub repository. Users
 will view, clone or download Threading without collaborator access; changes should
@@ -22,9 +32,9 @@ external path. The PDF/image index remains an
 optional tool, not a core onboarding dependency.
 
 ```text
-Threading
+StudyMate
 ├── system rules and repository boundaries
-├── automatically registered natural-language Threading Skill
+├── automatically registered natural-language StudyMate Skill
 ├── linked read-only GSA Pack with methods, reflection-document analysis and Stage 3 assessment guidance
 ├── evidence, reading, interview and prototype templates
 ├── complete Git-ignored Managed Workspaces under projects/local/

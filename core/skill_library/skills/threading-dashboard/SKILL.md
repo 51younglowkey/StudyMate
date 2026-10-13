@@ -1,7 +1,7 @@
-# Threading Dashboard Compatibility Route
+# StudyMate Dashboard Compatibility Route
 
 The primary installable route is `skills/threading/SKILL.md`. Use this file only
-when an older Threading checkout routes here directly.
+when an older StudyMate checkout routes here directly.
 
 1. Read root `DASHBOARD.md`.
 2. Prefer `projects/local/<slug>/` Managed Workspaces; treat `profiles/local/`

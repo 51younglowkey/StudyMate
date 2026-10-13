@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Create a complete local Threading Managed Workspace without importing raw sources."""
+"""Create a complete local StudyMate Managed Workspace without importing raw sources."""
 
 from __future__ import annotations
 
@@ -23,7 +23,7 @@ from common import (
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Adopt an existing project into a private Threading Managed Workspace."
+        description="Adopt an existing project into a private StudyMate Managed Workspace."
     )
     parser.add_argument("--slug", required=True, help="lowercase project slug")
     parser.add_argument("--title", required=True, help="project title")
@@ -31,6 +31,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--local-source", action="append", default=[], help="local source pointer")
     parser.add_argument("--figma-source", action="append", default=[], help="Figma file/page pointer")
     parser.add_argument("--chat-source", action="append", default=[], help="chat Markdown pointer")
+    parser.add_argument("--course-source", action="append", default=[], help="course brief, rubric or teaching-file pointer")
+    parser.add_argument("--web-source", action="append", default=[], help="course/LMS or other page URL; never fetched by this tool")
     parser.add_argument("--output-root", type=Path, default=PROJECTS_ROOT)
     parser.add_argument("--allow-external-root", action="store_true")
     return parser.parse_args()
@@ -50,6 +52,8 @@ def source_rows(args: argparse.Namespace) -> list[str]:
         ("local-folder", args.local_source),
         ("figma", args.figma_source),
         ("chat-markdown", args.chat_source),
+        ("course-material", args.course_source),
+        ("web-page", args.web_source),
     )
     for source_type, values in groups:
         for raw in values:
@@ -118,10 +122,10 @@ def main() -> int:
     configure_pack(project, args.pack)
 
     print(f"Created Managed Workspace: {project}")
-    print(f"Threading core: {core_version()}")
+    print(f"StudyMate core: {core_version()}")
     print(f"GSA Pack: {'linked and enabled' if args.pack == 'gsa' else 'disabled'}")
     print("Registered source pointers only; no raw source was inspected or copied.")
-    print("Next: ask the Agent to orient the named sources and propose a Current State.")
+    print("Next: tell the Agent what you want to achieve; choose one authorised source or begin from your idea.")
     return 0
 
 

@@ -1,16 +1,20 @@
-# Threading Skill Index
+# StudyMate Skill Index
 
 Last updated: 2026-08-11
 
 ## Reusable behaviour
 
-### Threading Managed Workspace
+### StudyMate Managed Workspace
 
-Installable skill: `../skills/threading/SKILL.md`
+Installable skill: `../../skills/threading/SKILL.md`
 Compatibility route: `skills/threading-dashboard/SKILL.md`
 
 Use for Dashboard, existing-project adoption, Current State, Figma evolution,
 chat reconciliation, linked GSA Pack, migration, update or doctor.
+
+Stage-aware project progression: `../../docs/PROJECT_FLOW.md`. Use before first
+task/next-move selection; new ideas start with framing and research, while
+existing projects join at the stage supported by their records.
 
 ### Evidence Chain Discipline
 
@@ -34,7 +38,7 @@ Use when selecting and applying a method such as systems mapping, Three Horizons
 
 Files: `frontdesk/dialogue_scope_current.md`, `frontdesk/frontdesk_framework_fix_mode.md`
 
-Use when improving Threading's structure, skill library, templates, indexes or bounded tools rather than writing a project argument.
+Use when improving StudyMate's structure, skill library, templates, indexes or bounded tools rather than writing a project argument.
 
 ## Optional method packs
 

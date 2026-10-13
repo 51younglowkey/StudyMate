@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Shared boundaries for Threading Managed Workspace tools."""
+"""Shared boundaries for StudyMate Managed Workspace tools."""
 
 from __future__ import annotations
 
@@ -35,7 +35,7 @@ def resolve_output_root(raw: Path, allow_external: bool) -> Path:
     if root == ROOT or ROOT in root.parents:
         return root
     if not allow_external:
-        raise ValueError("Refusing an output root outside this Threading workspace.")
+        raise ValueError("Refusing an output root outside this StudyMate workspace.")
     if root in {Path("/").resolve(), Path.home().resolve()}:
         raise ValueError("Refusing a filesystem root or home directory as an output root.")
     return root
@@ -47,7 +47,7 @@ def resolve_project(raw: Path, allow_external: bool, must_exist: bool = True) ->
     if ROOT not in project.parents:
         if not allow_external:
             raise ValueError(
-                "Refusing a project outside Threading. Use --allow-external-project "
+                "Refusing a project outside StudyMate. Use --allow-external-project "
                 "only after confirming the exact path."
             )
         if project in {Path("/").resolve(), Path.home().resolve()}:

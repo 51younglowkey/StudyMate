@@ -1,8 +1,14 @@
-# Threading Routes
+# StudyMate Routes
 
 ## Capability view
 
-Explain in plain language that Threading can:
+For first use, follow the core `docs/AGENT_ONBOARDING.md` guided start instead
+of presenting the full list below. Ask about the intended task and offer
+specific materials; do not make ideas and materials mutually exclusive.
+Core `docs/USER_JOURNEY.md` defines the entry choices. Demonstration requests
+use `examples/first-task/README.md` and do not automatically create a project.
+
+Explain in plain language that StudyMate can:
 
 1. start a Research and Design project from a question, brief or goal;
 2. accompany the project through framing, evidence, decisions, prototypes,
@@ -15,12 +21,17 @@ Explain in plain language that Threading can:
    Document analysis and Stage 3 audit;
 8. show one evidence-supported next move.
 
-End with one useful prompt chosen from the situation: `帮我新建一个项目空间`,
-`帮我接管这个现有项目` or `继续推进这个项目`.
+Use `启动 StudyMate / Start StudyMate` as the single beginner entry. Existing
+new/adopt/continue prompts remain valid shortcuts.
 
 ## New-project start
 
-1. Confirm the project title, slug, type and intended outcome.
+Follow core `docs/PROJECT_FLOW.md` before selecting the first task. A new idea
+or course material starts with framing, source review and a research need/plan;
+it does not default to concept development or a prototype.
+
+1. Begin with the user's intended task; propose and confirm title, slug and local
+   destination when persistent project knowledge is needed.
 2. Ask for the minimum working question and current uncertainty; do not demand
    a polished brief.
 3. Ask whether the project is Research, Service Design, Product Design or another
@@ -30,6 +41,7 @@ End with one useful prompt chosen from the situation: `帮我新建一个项目�
 6. Propose the first Current State and one next move.
 7. Ask for confirmation before writing the proposal as the authoritative
    `CURRENT.md`.
+8. Complete one useful bounded task and save an independent session handoff.
 
 ## Existing-project adoption
 
@@ -37,12 +49,17 @@ End with one useful prompt chosen from the situation: `帮我新建一个项目�
    explicitly chosen existing workspace.
 2. Confirm project title and slug.
 3. Record Figma, local-folder and chat-archive pointers without inspection.
+   Include course brief, rubric, teaching-file and authorised web-page pointers;
+   follow the core `docs/MATERIALS_INTAKE.md` for their different roles.
 4. Ask permission for a bounded orientation pass over named sources.
 5. Separate `observed`, `inferred`, `candidate` and `unknown`.
+   Establish the supported stage with `docs/PROJECT_FLOW.md`; existing design
+   outputs do not by themselves establish a research basis.
 6. Propose a current question, direction, working set and next action.
 7. Ask the user to confirm or correct the proposal.
 8. Only then update `CURRENT.md`. Preserve competing or older directions in
    the decision and iteration records as active, rejected or superseded.
+9. Complete the user's first task rather than stopping after creating directories.
 
 Use `90_scripts_tools/project_workspace/adopt_project.py` for deterministic
 workspace creation. It creates structure and pointers only; it does not inspect
@@ -50,13 +67,18 @@ or copy raw sources.
 
 ## Continue a project
 
-1. Read the selected workspace's nested `AGENTS.md`, `CURRENT.md`, `packs.md`
+1. Bind the conversation using core `docs/SESSION_HANDOFF.md`. Read the selected
+   workspace's nested `AGENTS.md`, `CURRENT.md`, `packs.md`
    and bounded records.
 2. Render the Dashboard and state what is confirmed, candidate, superseded or
    missing.
-3. Ask which workstream to continue: evidence, decisions, prototype, testing,
-   writing or project handover.
+3. Continue the user's stated task. If none is stated, offer one recommended
+   next move with the option to switch tasks; do not repeat initial intake.
 4. Propose one next move with its source or confirmation requirement.
+   Match it to the supported stage using core `docs/PROJECT_FLOW.md`; repair
+   missing upstream research/synthesis links without restarting valid work.
+5. Save a separate session handoff when ending or switching tasks; never promote
+   its suggestions into CURRENT.md without the owner's confirmation.
 
 ## Figma evolution
 

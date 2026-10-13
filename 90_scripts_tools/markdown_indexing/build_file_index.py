@@ -57,7 +57,7 @@ def project_for(path: Path) -> str:
         return "System context"
     if str(rel).startswith("90_scripts_tools/"):
         return "Scripts / tools"
-    return "Threading"
+    return "StudyMate"
 
 
 def file_type(path: Path) -> str:
@@ -93,7 +93,7 @@ def main() -> None:
         rows.append((rel, file_type(path), likely_role(path), project_for(path), modified))
 
     lines = [
-        "# Threading File Index",
+        "# StudyMate File Index",
         "",
         f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M')}",
         "",

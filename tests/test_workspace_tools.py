@@ -76,6 +76,7 @@ class WorkspaceToolsTest(unittest.TestCase):
             "--project",
             str(project),
             "--allow-external-project",
+            "--details",
         )
         self.assertIn("Test Project", rendered.stdout)
         self.assertIn("GSA PACK        enabled", rendered.stdout)
@@ -173,7 +174,10 @@ class WorkspaceToolsTest(unittest.TestCase):
         user_home = self.root / "user-home"
         legacy = user_home / ".codex" / "skills" / "threading"
         legacy.parent.mkdir(parents=True)
-        legacy.symlink_to(ROOT / "skills" / "threading", target_is_directory=True)
+        try:
+            legacy.symlink_to(ROOT / "skills" / "threading", target_is_directory=True)
+        except OSError as error:
+            self.skipTest(f"This host cannot create symlinks: {error}; automatic copy fallback is tested separately")
         run(
             THREADING_TOOLS / "install_skill.py",
             "--home",
@@ -296,7 +300,7 @@ class WorkspaceToolsTest(unittest.TestCase):
         self.assertEqual(source_context, (review / "context.md").read_text(encoding="utf-8"))
         self.assertTrue((review / "MIGRATION_REVIEW.md").is_file())
         self.assertIn(
-            str(legacy),
+            str(legacy.resolve()),
             (project / "sources" / "source_registry.md").read_text(encoding="utf-8"),
         )
         state = json.loads((project / "threading.json").read_text(encoding="utf-8"))

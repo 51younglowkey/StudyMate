@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Enable or disable Threading's linked, read-only GSA Pack for a local project."""
+"""Enable or disable StudyMate's linked, read-only GSA Pack for a local project."""
 
 from __future__ import annotations
 
@@ -10,7 +10,7 @@ from common import core_version, gsa_version, read_state, resolve_project, write
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Manage linked Threading packs.")
+    parser = argparse.ArgumentParser(description="Manage linked StudyMate packs.")
     parser.add_argument("--project", type=Path, required=True)
     action = parser.add_mutually_exclusive_group(required=True)
     action.add_argument("--enable-gsa", action="store_true")
@@ -65,7 +65,7 @@ def main() -> int:
         print(f"GSA Pack enabled (linked, read-only), version {gsa_version()}")
         print("Available: taught methods, Provotyping, Reflection Document analysis, Stage 3 audit.")
     else:
-        print("GSA Pack disabled for this project. Core Threading remains available.")
+        print("GSA Pack disabled for this project. Core StudyMate remains available.")
     return 0
 
 

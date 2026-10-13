@@ -36,5 +36,7 @@ Confirmation status: needs confirmation
 
 [DECISION PENDING]
 
+## Snapshot rules
+
 Only user-confirmed material belongs in this snapshot. Preserve earlier states
 in the decision and iteration records.

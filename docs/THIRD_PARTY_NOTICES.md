@@ -1,6 +1,6 @@
 # Third-Party Notices
 
-The licenses in `LICENSE` and `LICENSE-DOCS.md` apply only to Threading's
+The licenses in `LICENSE` and `LICENSE-DOCS.md` apply only to StudyMate's
 original code and original documentation. They do not relicense third-party
 material.
 
@@ -16,7 +16,7 @@ official GSA product or endorsement.
 ## Referenced paper
 
 The Provotyping method note cites a third-party paper by Laurens Boer and Jared
-Donovan. Its PDF is not bundled in this repository. Threading does not grant a
+Donovan. Its PDF is not bundled in this repository. StudyMate does not grant a
 new licence for that paper; use the bibliographic citation and DOI, and check
 the publisher's terms before redistributing any copy.
 
@@ -31,5 +31,5 @@ a consequential grading or submission decision.
 ## Attribution boundary
 
 Do not imply that any third-party author, course, institution or source
-endorses Threading. Do not apply the Threading licences to material that is not
+endorses StudyMate. Do not apply the StudyMate licences to material that is not
 owned or cleared by the project.

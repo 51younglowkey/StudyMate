@@ -1,15 +1,21 @@
-# Threading Capability Guide
+# StudyMate Capability Guide
 
 ## Product definition
 
-Threading 是一个面向 Research and Design 的 Agent-native、evidence-led 项目工作流。
+StudyMate 是一个面向 Research and Design 的 Agent-native、evidence-led 项目工作流。
 它可以从零开始、陪伴完整生命周期，也可以接入已经形成的项目，把问题、来源、证据、
 洞察、决策、原型、测试和成果连接起来。
 
-Threading is an Agent-native, evidence-led project workflow for Research and Design. It can
+StudyMate is an Agent-native, evidence-led project workflow for Research and Design. It can
 start a project, accompany its full lifecycle or join an already-developed project.
 
-## Three entry points
+## Beginner entry
+
+Say `启动 StudyMate / Start StudyMate` or describe your task. Ideas, existing
+materials and a concrete problem can coexist. The Agent guides one useful task;
+the following three routes remain available as shortcuts.
+
+## Three shortcuts
 
 | 入口 | 适合什么情况 | 示例 |
 | --- | --- | --- |
@@ -46,7 +52,14 @@ Dashboard
 帮我建立这个项目的 source map
 帮我整理这个本地项目文件夹
 帮我分析这些 PDF，并建立本地 index
+我有课程 PPT、作业要求和自己的想法，帮我找到一个可以推进的任务
+把这份 rubric 与我的当前成果对应，说明还缺什么
+请检查我指定的 Canvas 课程要求页面，结合我的目标给出下一步
 ```
+
+课程 brief、评分标准/ILOs、教学文件和课程链接按
+[Materials intake](MATERIALS_INTAKE.md) 处理。只有可访问且获授权的指定范围才会
+被检查；课程要求、教学方法与研究证据分别记录，不自动启用 GSA Pack。
 
 ### Figma 与聊天记录
 
@@ -88,7 +101,11 @@ Dashboard
 帮我把 evidence chain 变成 document outline
 帮我检查这段文字的 claim、evidence 和 limitation
 帮我整理一个可以交接的 project summary
+保存这次的交接记录，让我在新对话继续这个项目
 ```
+
+跨对话按 [Session handoff](SESSION_HANDOFF.md) 绑定项目、读取相关记录；并行输出
+各自保存，共享状态协调合并。会话候选进度不自动进入 Current State。
 
 ### GSA Pack
 
@@ -102,11 +119,11 @@ Dashboard
 ### Maintenance
 
 ```text
-Update Threading
-升级 Threading，并接续我已有的项目
-Threading doctor
-迁移我的旧 Threading profile
-显示当前 Threading 和 GSA Pack 版本
+Update StudyMate
+升级 StudyMate，并接续我已有的项目
+StudyMate doctor
+迁移我的旧 StudyMate profile
+显示当前 StudyMate 和 GSA Pack 版本
 ```
 
 ## How the Agent handles these prompts
@@ -131,7 +148,7 @@ source → note / observation → interpretation → insight → opportunity
        → criteria → decision → prototype → testing → iteration → outcome
 ```
 
-Threading 会帮助你记录这条链路，但 method、summary 或 model-generated prose 不会自动
+StudyMate 会帮助你记录这条链路，但 method、summary 或 model-generated prose 不会自动
 成为 empirical evidence。Claim、decision 和 output 仍然需要 provenance、confirmation
 status 和 limitation。
 

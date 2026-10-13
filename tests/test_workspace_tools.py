@@ -300,7 +300,7 @@ class WorkspaceToolsTest(unittest.TestCase):
         self.assertEqual(source_context, (review / "context.md").read_text(encoding="utf-8"))
         self.assertTrue((review / "MIGRATION_REVIEW.md").is_file())
         self.assertIn(
-            str(legacy),
+            str(legacy.resolve()),
             (project / "sources" / "source_registry.md").read_text(encoding="utf-8"),
         )
         state = json.loads((project / "threading.json").read_text(encoding="utf-8"))

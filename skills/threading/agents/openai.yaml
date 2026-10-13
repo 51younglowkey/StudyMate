@@ -1,6 +1,6 @@
 interface:
-  display_name: "Threading"
+  display_name: "StudyMate"
   short_description: "Organise complex research and design projects locally"
-  default_prompt: "Use $threading to orient this project and show its current state."
+  default_prompt: "Use $threading to help me start, choose useful materials and complete one project task."
 policy:
   allow_implicit_invocation: true

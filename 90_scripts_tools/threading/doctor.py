@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Report Threading core, skill, project and linked-pack health."""
+"""Report StudyMate core, skill, project and linked-pack health."""
 
 from __future__ import annotations
 
@@ -29,9 +29,11 @@ REQUIRED_WORKSPACE_PATHS = (
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Check Threading installation and project health.")
+    parser = argparse.ArgumentParser(description="Check StudyMate installation and project health.")
     parser.add_argument("--project", type=Path)
     parser.add_argument("--home", type=Path, default=Path.home())
+    parser.add_argument("--platform", choices=("all", "codex", "claude", "repo"), default="all",
+                        help="repo checks core only; other values also verify selected Skill registrations")
     return parser.parse_args()
 
 
@@ -40,11 +42,19 @@ def check(label: str, ok: bool, detail: str) -> bool:
     return ok
 
 
-def git_ignored(path: str) -> bool:
-    result = subprocess.run(
-        ["git", "check-ignore", "-q", path], cwd=ROOT, check=False
-    )
-    return result.returncode == 0
+def privacy_check() -> tuple[bool, str]:
+    try:
+        repository = subprocess.run(["git", "rev-parse", "--is-inside-work-tree"],
+                                    cwd=ROOT, capture_output=True, text=True, check=False)
+        if repository.returncode == 0:
+            result = subprocess.run(["git", "check-ignore", "-q", "projects/local/example"],
+                                    cwd=ROOT, capture_output=True, check=False)
+            return result.returncode == 0, "projects/local ignore verified by Git"
+    except FileNotFoundError:
+        pass
+    ignore = ROOT / ".gitignore"
+    declared = ignore.is_file() and "/projects/local/" in ignore.read_text(encoding="utf-8").splitlines()
+    return declared, "projects/local ignore declaration only; Git verification unavailable in this ZIP/non-Git environment"
 
 
 def main() -> int:
@@ -54,7 +64,8 @@ def main() -> int:
     results.append(check("core", version_path.is_file(), str(ROOT)))
     version = version_path.read_text(encoding="utf-8").strip() if version_path.exists() else "missing"
     results.append(check("version", version != "missing", version))
-    results.append(check("local privacy", git_ignored("projects/local/example"), "projects/local is ignored"))
+    privacy_ok, privacy_detail = privacy_check()
+    results.append(check("local privacy", privacy_ok, privacy_detail))
 
     home = args.home.expanduser().resolve()
     skill_locations = (
@@ -62,13 +73,18 @@ def main() -> int:
         ("Claude Code skill", home / ".claude" / "skills" / "threading"),
     )
     for label, skill in skill_locations:
-        installed = skill.exists() or skill.is_symlink()
+        if args.platform == "repo" or (args.platform == "codex" and label != "Codex skill") or (args.platform == "claude" and label != "Claude Code skill"):
+            continue
+        installed = (skill / "SKILL.md").is_file()
         if installed and skill.is_symlink():
             detail = f"symlink -> {skill.resolve()}"
+            installed = skill.resolve() == (ROOT / "skills" / "threading").resolve()
         elif installed:
-            detail = "copied installation"
+            pointer = skill / "references" / "core-path.txt"
+            installed = pointer.is_file() and Path(pointer.read_text(encoding="utf-8").strip()).resolve() == ROOT
+            detail = "copied installation; Core updates require --mode copy --update"
         else:
-            detail = "not registered; run install_skill.py"
+            detail = "missing or invalid; run install_skill.py, or use --platform repo for a repository-only host"
         results.append(check(label, installed, detail))
 
     if args.project:

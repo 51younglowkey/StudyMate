@@ -1,4 +1,4 @@
-# Threading Workflow Rules
+# StudyMate Workflow Rules
 
 These rules govern the reusable core. They apply to academic, design-research and practice-based projects added later by individual users.
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Safely connect older Threading traces to the current Managed Workspace schema."""
+"""Safely connect older StudyMate traces to the current Managed Workspace schema."""
 
 from __future__ import annotations
 
@@ -45,7 +45,7 @@ KNOWN_LEGACY_FILES = (
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description=(
-            "Check or apply non-destructive compatibility upgrades for Threading "
+            "Check or apply non-destructive compatibility upgrades for StudyMate "
             "Managed Workspaces and legacy profiles."
         )
     )
@@ -178,7 +178,7 @@ def plan_project(project: Path) -> dict:
         plan["changes"].append(f"schema {schema or 'unknown'} -> {CURRENT_SCHEMA}")
     if state.get("threading_version") != core_version():
         plan["changes"].append(
-            f"Threading {state.get('threading_version') or 'unknown'} -> {core_version()}"
+            f"StudyMate {state.get('threading_version') or 'unknown'} -> {core_version()}"
         )
     pack = state.get("gsa_pack") if isinstance(state.get("gsa_pack"), dict) else {}
     expected_pack_version = gsa_version() if plan["gsa_enabled"] else None
@@ -283,11 +283,11 @@ def apply_project(plan: dict, stamp: str) -> list[str]:
     history_path = unique_history_path(project, stamp)
     history_path.parent.mkdir(parents=True, exist_ok=True)
     history_path.write_text(
-        "# Threading Compatibility Upgrade\n\n"
+        "# StudyMate Compatibility Upgrade\n\n"
         f"Date: {date.today().isoformat()}\n"
         f"Project: {plan['title']}\n"
         f"Schema: {plan['schema_before'] or 'unknown'} -> {CURRENT_SCHEMA}\n"
-        f"Threading: {plan['version_before'] or 'unknown'} -> {core_version()}\n\n"
+        f"StudyMate: {plan['version_before'] or 'unknown'} -> {core_version()}\n\n"
         "## Applied changes\n\n"
         + "\n".join(f"- {item}" for item in changes)
         + "\n\nExisting project content was preserved. Current State still requires project-owner confirmation.\n",
@@ -303,7 +303,7 @@ def legacy_plan(profile: Path, output_root: Path) -> dict:
             "kind": "legacy",
             "path": profile,
             "blocked": True,
-            "error": "no recognised legacy Threading files found",
+            "error": "no recognised legacy StudyMate files found",
             "action": "blocked",
         }
     try:
@@ -452,10 +452,10 @@ def create_from_legacy(plan: dict, output_root: Path) -> list[str]:
 def write_report(path: Path, stamp: str, managed: list[dict], legacy: list[dict]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     lines = [
-        "# Threading Upgrade Report",
+        "# StudyMate Upgrade Report",
         "",
         f"Generated: {stamp}",
-        f"Threading core: {core_version()}",
+        f"StudyMate core: {core_version()}",
         f"Managed Workspace schema: {CURRENT_SCHEMA}",
         "",
         "## Managed Workspaces",
@@ -522,7 +522,7 @@ def main() -> int:
     legacy_plans = [legacy_plan(profile, output_root) for profile in legacy_profiles]
     blocked = [item for item in managed_plans + legacy_plans if item.get("blocked")]
 
-    print("THREADING COMPATIBILITY UPGRADE")
+    print("STUDYMATE COMPATIBILITY UPGRADE")
     print(f"Core: {core_version()} / Managed Workspace schema: {CURRENT_SCHEMA}")
     print(f"Mode: {'APPLY' if args.apply else 'CHECK'}")
     print()

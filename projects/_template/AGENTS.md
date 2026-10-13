@@ -1,7 +1,7 @@
-# Local Threading Project Instructions
+# Local StudyMate Project Instructions
 
 This directory is a private Managed Workspace for one school, research or design
-project. Root Threading rules still apply; these instructions add project-local
+project. Root StudyMate rules still apply; these instructions add project-local
 behaviour.
 
 1. Read `CURRENT.md` first for confirmed current state.
@@ -20,3 +20,11 @@ behaviour.
    the present direction.
 9. Treat the linked GSA Pack as read-only. Write analysis here, not into the
    public pack.
+10. Bind this conversation to this project. Read only relevant session handoffs
+    after CURRENT.md. Start an independent session record, then save completed
+    work, source scope, proposed next move and pending confirmations at handoff.
+11. Keep course requirements, taught methods and research evidence separate.
+    Use the core `docs/MATERIALS_INTAKE.md` route for teaching files and LMS pages.
+12. For concurrent conversations, keep separate outputs and use one writer to
+    reconcile shared records. A session handoff is candidate progress, not an
+    automatic update of CURRENT.md.

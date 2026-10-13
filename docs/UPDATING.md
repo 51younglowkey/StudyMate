@@ -1,4 +1,4 @@
-# Updating Threading
+# Updating StudyMate
 
 Clone once; update the same clone afterward.
 
@@ -21,7 +21,7 @@ python3 90_scripts_tools/threading/doctor.py
 ```
 
 `projects/local/` and `profiles/local/` are Git-ignored and are not changed by
-the Git fast-forward. Afterward, Threading shows the compatibility plan. The
+the Git fast-forward. Afterward, StudyMate shows the compatibility plan. The
 separate `--apply-workspaces` step adds only missing schema files, refreshes
 machine-readable version metadata, connects legacy profiles and writes an
 upgrade report. Existing Current State, evidence, decisions, iterations and
@@ -34,7 +34,7 @@ must be registered again with `install_skill.py --mode copy --update`.
 
 ## Natural-language route
 
-Say `Update Threading` or `升级 Threading，并接续我已有的项目`. The Agent must
+Say `Update StudyMate` or `升级 StudyMate，并接续我已有的项目`. The Agent must
 run check mode and report both the core update and compatibility plan before
 using `--apply`.
 

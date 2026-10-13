@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Copy a legacy Threading profile into a v0.2 Managed Workspace."""
+"""Copy a legacy StudyMate profile into a v0.2 Managed Workspace."""
 
 from __future__ import annotations
 
@@ -119,7 +119,7 @@ def write_known_records(source: Path, destination: Path) -> None:
         new = destination / new_name
         content = old.read_text(encoding="utf-8")
         banner = (
-            "> Migrated from a legacy Threading profile. Review status and structure before promotion.\n\n"
+            "> Migrated from a legacy StudyMate profile. Review status and structure before promotion.\n\n"
         )
         new.write_text(banner + content, encoding="utf-8")
 

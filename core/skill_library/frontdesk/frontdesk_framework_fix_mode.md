@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This frontdesk is the entry layer for improving Threading's structure, skills, templates, file routing and bounded tools without silently absorbing a user's private project content.
+This frontdesk is the entry layer for improving StudyMate's structure, skills, templates, file routing and bounded tools without silently absorbing a user's private project content.
 
 ## Routing rules
 

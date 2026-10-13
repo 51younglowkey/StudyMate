@@ -1,17 +1,17 @@
 # Compatibility Upgrade / 兼容升级
 
-This workflow updates Threading without discarding project knowledge created by
+This workflow updates StudyMate without discarding project knowledge created by
 an earlier version.
 
 After an older Core fast-forwards to a version containing this workflow, start
-a new Agent task in the Threading folder once. The new project instructions run
+a new Agent task in the StudyMate folder once. The new project instructions run
 the compatibility check automatically and show any required plan.
 
 ## Natural-language command / 自然语言入口
 
 ```text
-升级 Threading，并接续我已有的项目
-Update Threading and reconnect my existing projects
+升级 StudyMate，并接续我已有的项目
+Update StudyMate and reconnect my existing projects
 ```
 
 ## Check first / 先检查
@@ -24,7 +24,7 @@ Check mode reports:
 
 - recognised Managed Workspaces under `projects/local/`;
 - missing files required by the current schema;
-- stored and current Threading versions;
+- stored and current StudyMate versions;
 - linked GSA Pack metadata changes;
 - legacy profiles that can be migrated or attached for review;
 - blocked workspaces requiring manual attention.

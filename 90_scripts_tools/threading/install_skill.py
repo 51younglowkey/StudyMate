@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Register Threading as a user-level Codex and Claude Code skill."""
+"""Register StudyMate as a user-level Codex and Claude Code skill."""
 
 from __future__ import annotations
 
@@ -15,7 +15,7 @@ SOURCE = ROOT / "skills" / "threading"
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Register the Threading skill for Codex and Claude Code."
+        description="Register the StudyMate skill for Codex and Claude Code."
     )
     parser.add_argument("--home", type=Path, default=Path.home())
     parser.add_argument(
@@ -24,7 +24,8 @@ def parse_args() -> argparse.Namespace:
         default="all",
         help="register for both supported Agents by default",
     )
-    parser.add_argument("--mode", choices=("symlink", "copy"), default="symlink")
+    parser.add_argument("--mode", choices=("auto", "symlink", "copy"), default="auto",
+                        help="auto links when possible and falls back to a copy")
     parser.add_argument(
         "--update",
         action="store_true",
@@ -53,10 +54,35 @@ def backup_existing(destination: Path) -> Path:
     return backup
 
 
+def same_installation(destination: Path, mode: str) -> bool:
+    if destination.is_symlink():
+        return mode in {"auto", "symlink"} and destination.resolve() == SOURCE.resolve()
+    pointer = destination / "references" / "core-path.txt"
+    if mode not in {"auto", "copy"} or not (destination / "SKILL.md").is_file() or not pointer.is_file():
+        return False
+    return Path(pointer.read_text(encoding="utf-8").strip()).resolve() == ROOT.resolve()
+
+
+def register(destination: Path, mode: str) -> str:
+    if mode in {"auto", "symlink"}:
+        try:
+            destination.symlink_to(SOURCE.resolve(), target_is_directory=True)
+            return "symlink"
+        except OSError:
+            if mode == "symlink" or destination.exists() or destination.is_symlink():
+                raise
+            print("Symlink unavailable; registering a copied Skill. Re-register the copy after Core updates.")
+    shutil.copytree(SOURCE, destination)
+    (destination / "references" / "core-path.txt").write_text(
+        str(ROOT.resolve()) + "\n", encoding="utf-8"
+    )
+    return "copy"
+
+
 def main() -> int:
     args = parse_args()
     home = args.home.expanduser().resolve()
-    if home == Path("/").resolve():
+    if home == Path(home.anchor):
         raise SystemExit("Refusing to use a filesystem root as the user home.")
     if not SOURCE.is_dir():
         raise SystemExit(f"Missing skill source: {SOURCE}")
@@ -68,24 +94,16 @@ def main() -> int:
     for _, destination in destinations:
         if not (destination.exists() or destination.is_symlink()):
             continue
-        already_linked = (
-            destination.is_symlink()
-            and destination.resolve() == SOURCE.resolve()
-            and args.mode == "symlink"
-        )
-        if not already_linked and not args.update:
+        if not same_installation(destination, args.mode) and not args.update:
             raise SystemExit(
                 f"Skill destination already exists: {destination}. "
                 "It was not changed. Inspect it, then use --update only if replacement is intended."
             )
 
     for agent_name, destination in destinations:
-        if (
-            destination.is_symlink()
-            and destination.resolve() == SOURCE.resolve()
-            and args.mode == "symlink"
-        ):
-            print(f"{agent_name}: Threading skill already linked: {destination}")
+        if same_installation(destination, args.mode) and not args.update:
+            kind = "linked" if destination.is_symlink() else "copied (refresh with --mode copy --update after Core changes)"
+            print(f"{agent_name}: StudyMate skill already {kind}: {destination}")
             continue
 
         destination.parent.mkdir(parents=True, exist_ok=True)
@@ -93,15 +111,15 @@ def main() -> int:
         if destination.exists() or destination.is_symlink():
             backup = backup_existing(destination)
 
-        if args.mode == "symlink":
-            destination.symlink_to(SOURCE.resolve(), target_is_directory=True)
-        else:
-            shutil.copytree(SOURCE, destination)
-            (destination / "references" / "core-path.txt").write_text(
-                str(ROOT.resolve()) + "\n", encoding="utf-8"
-            )
+        try:
+            installed_mode = register(destination, args.mode)
+        except OSError as error:
+            if backup and not (destination.exists() or destination.is_symlink()):
+                backup.rename(destination)
+            raise SystemExit(f"Skill registration failed at {destination}: {error}. "
+                             "Continue with repository instructions; inspect any partial copy before retrying.") from error
 
-        print(f"{agent_name}: registered Threading skill ({args.mode}): {destination}")
+        print(f"{agent_name}: registered StudyMate skill ({installed_mode}): {destination}")
         if backup:
             print(f"{agent_name}: previous installation preserved at: {backup}")
 
@@ -111,11 +129,11 @@ def main() -> int:
         legacy = home / ".codex" / "skills" / "threading"
         if legacy.is_symlink() and legacy.resolve() == SOURCE.resolve():
             legacy.unlink()
-            print(f"Codex: removed obsolete Threading symlink: {legacy}")
+            print(f"Codex: removed obsolete StudyMate symlink: {legacy}")
         elif legacy.exists() or legacy.is_symlink():
             print(f"Codex: preserved legacy installation for manual review: {legacy}")
 
-    print("Threading Skill registration is ready. If it is not visible, restart the Agent once.")
+    print("StudyMate Skill registration is ready. If it is not visible, restart the Agent once.")
     return 0
 
 

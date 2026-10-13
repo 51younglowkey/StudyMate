@@ -2,7 +2,7 @@
 
 Mode: Framework Fix
 
-This route is for maintaining Threading's reusable functions and framework.
+This route is for maintaining StudyMate's reusable functions and framework.
 
 ## In scope
 

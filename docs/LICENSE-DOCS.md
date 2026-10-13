@@ -2,7 +2,7 @@
 
 Unless a file or directory is identified as third-party material in
 `THIRD_PARTY_NOTICES.md`, original documentation, templates, examples and
-paraphrased method guidance in Threading are licensed under the
+paraphrased method guidance in StudyMate are licensed under the
 Creative Commons Attribution 4.0 International License (CC BY 4.0):
 
 <https://creativecommons.org/licenses/by/4.0/>
